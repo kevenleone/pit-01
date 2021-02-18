@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Todo from './pages/Todo';
 
@@ -10,12 +11,13 @@ const routes = [{
   path: '/',
 }, {
   component: Todo,
-  name: 'Todo Task',
+  name: 'Todo',
   path: '/todo',
 }];
 
 const Routes = () => (
   <BrowserRouter>
+    <Navbar title="Pitang" routes={routes} />
     <Switch>
       {routes.map(({ path, component }) => (
         <Route exact key={path} path={path} component={component} />

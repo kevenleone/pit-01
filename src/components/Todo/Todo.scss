@@ -1,0 +1,18 @@
+.todos {
+    margin-top: 20px;
+
+    .todo {
+        background-color: lightblue;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+
+        span {
+            margin-left: 5px;
+        }
+
+        .done {
+            text-decoration: line-through;
+        }
+    }
+}
