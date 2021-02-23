@@ -8,20 +8,21 @@ export default function index() {
   const [todos, setTodos] = useState([]);
 
   return (
-    <Page title="Todo App">
+    <Page title="To-Do List">
 
       <TodoForm todos={todos} setTodos={setTodos} />
       <TodoList todos={todos} setTodos={setTodos} />
 
       <button
+        //disabled={undefined}
         type="button"
-        className="btn btn-info"
+        className="btn btn-primary"
         onClick={() => setTodos([])}
       >
-        Clear Todos
+        Clear All
       </button>
 
-      <p>{`Todo count: ${todos.length}`}</p>
+      <p>{`Counter: ${todos.length}`}</p>
     </Page>
   );
 }

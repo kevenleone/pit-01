@@ -62,7 +62,7 @@ const TodoList = ({ setTodos, todos = [] }) => {
         <thead>
           <tr>
             <th>#</th>
-            <th width="60%">Task</th>
+            <th width="60%">Task Description</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -103,7 +103,7 @@ const TodoList = ({ setTodos, todos = [] }) => {
         title={editTodo?.name}
       >
         <Form.Group>
-          <Form.Label>Todo Name</Form.Label>
+          <Form.Label>New Task Name:</Form.Label>
           <Form.Control
             value={text}
             onChange={({ target: { value } }) => setText(value)}

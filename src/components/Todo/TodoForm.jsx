@@ -9,10 +9,6 @@ export default function TodoForm({ todos, setTodos }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!todo.trim()) {
-      return alert('Todo vazio');
-    }
-
     setTodos([
       ...todos,
       { name: todo, isDone: false, id: new Date().getTime() },
@@ -30,6 +26,7 @@ export default function TodoForm({ todos, setTodos }) {
         <Col lg={9} xl={9}>
           <Form.Group>
             <Form.Control
+              required
               value={todo}
               onChange={onChange}
               placeholder="Insert your daily activity"
@@ -37,7 +34,7 @@ export default function TodoForm({ todos, setTodos }) {
           </Form.Group>
         </Col>
         <Col>
-          <Button disabled={!todo.trim()} type="submit">Add Todo</Button>
+          <Button disabled={!todo.trim()} type="submit">Add Task</Button>
         </Col>
       </Row>
     </Form>
