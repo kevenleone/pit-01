@@ -10,7 +10,7 @@ export default function TodoForm({ todos, setTodos }) {
     event.preventDefault();
 
     if (!todo.trim()) {
-      return alert('Todo vazio');
+      return alert('To-Do vazio');
     }
 
     setTodos([
@@ -37,7 +37,7 @@ export default function TodoForm({ todos, setTodos }) {
           </Form.Group>
         </Col>
         <Col>
-          <Button disabled={!todo.trim()} type="submit">Add Todo</Button>
+          <Button disabled={!todo.trim()} type="submit">Add Task</Button>
         </Col>
       </Row>
     </Form>

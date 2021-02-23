@@ -11,7 +11,7 @@ const routes = [{
   path: '/',
 }, {
   component: Todo,
-  name: 'Todo',
+  name: 'To-Do App',
   path: '/todo',
 }];
 
