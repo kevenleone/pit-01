@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Button, Form } from 'react-bootstrap';
 import { FaTrash, FaPencilAlt } from 'react-icons/fa';
+import axios from '../../utils/api';
 
 import Modal from '../Modal';
 
@@ -11,21 +12,26 @@ const TodoList = ({ setTodos, todos = [] }) => {
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState('');
 
-  const handleChecked = (event, { id }) => {
-    const { checked } = event.target;
+  const handleChecked = async (event, _editTodo) => {
+    const { checked: isDone } = event.target;
 
     const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
+      if (todo.id === _editTodo.id) {
         return {
           ...todo,
-          isDone: checked,
+          isDone,
         };
       }
 
       return todo;
     });
 
-    setTodos(newTodos);
+    try {
+      await axios.put(`todos/${_editTodo.id}`, { ..._editTodo, isDone });
+      setTodos(newTodos);
+    } catch (e) {
+      console.error(e.message);
+    }
   };
 
   const handleEdit = (todo) => {
@@ -34,26 +40,37 @@ const TodoList = ({ setTodos, todos = [] }) => {
     setShowModal(!showModal);
   };
 
-  const handleRemove = ({ id }) => {
+  const handleRemove = async ({ id }) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
 
-    setTodos(newTodos);
+    try {
+      await axios.delete(`/todos/${id}`);
+      setTodos(newTodos);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const onEditTodo = () => {
+  const onEditTodo = async () => {
+    const name = text;
     const newTodos = todos.map((todo) => {
       if (todo.id === editTodo.id) {
         return {
           ...todo,
-          name: text,
+          name,
         };
       }
 
       return todo;
     });
 
-    setTodos(newTodos);
-    handleEdit();
+    try {
+      await axios.put(`/todos/${editTodo.id}`, { ...editTodo, name });
+      setTodos(newTodos);
+      handleEdit();
+    } catch (e) {
+      console.error(e.message);
+    }
   };
 
   return (
@@ -71,6 +88,7 @@ const TodoList = ({ setTodos, todos = [] }) => {
             <tr key={index} className="todo">
               <td>
                 <input
+                  checked={todo.isDone}
                   onChange={(event) => handleChecked(event, todo)}
                   type="checkbox"
                 />
@@ -79,7 +97,9 @@ const TodoList = ({ setTodos, todos = [] }) => {
                 <span className={todo.isDone ? 'done' : ''}>{todo.name}</span>
               </td>
               <td>
-                <Button onClick={() => handleEdit(todo)}>
+                <Button
+                  onClick={() => handleEdit(todo)}
+                >
                   <FaPencilAlt />
                   {' Edit'}
                 </Button>

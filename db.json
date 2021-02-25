@@ -1,0 +1,41 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "title": "Minha primeira requisição",
+      "author": "keven",
+      "id": 2
+    }
+  ],
+  "todos": [
+    {
+      "isDone": false,
+      "name": "wwwwwwww",
+      "id": 3
+    },
+    {
+      "isDone": false,
+      "name": "qqqq",
+      "id": 4
+    },
+    {
+      "isDone": false,
+      "name": "wwww",
+      "id": 5
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

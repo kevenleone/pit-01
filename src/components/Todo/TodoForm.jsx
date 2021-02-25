@@ -2,22 +2,30 @@ import React, { useState } from 'react';
 import {
   Row, Form, Col, Button,
 } from 'react-bootstrap';
+import axios from '../../utils/api';
 
 export default function TodoForm({ todos, setTodos }) {
   const [todo, setTodo] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!todo.trim()) {
       return alert('Todo vazio');
     }
 
-    setTodos([
-      ...todos,
-      { name: todo, isDone: false, id: new Date().getTime() },
-    ]);
-    setTodo('');
+    try {
+      const response = await axios.post('/todos', { isDone: false, name: todo });
+
+      setTodos([
+        ...todos,
+        response.data,
+      ]);
+
+      setTodo('');
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const onChange = ({ target: { value } }) => {
