@@ -19,7 +19,7 @@ const columns = [
 
 export default function index() {
   return (
-    <Page title="Home">
+    <Page title="User">
       <ListView columns={columns} endpoint="/user" />
     </Page>
   );
