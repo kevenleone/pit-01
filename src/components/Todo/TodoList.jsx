@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Button, Form } from 'react-bootstrap';
 import { FaTrash, FaPencilAlt } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 import axios from '../../utils/api';
 
 import Modal from '../Modal';
@@ -29,6 +30,7 @@ const TodoList = ({ setTodos, todos = [] }) => {
     try {
       await axios.put(`todos/${_editTodo.id}`, { ..._editTodo, isDone });
       setTodos(newTodos);
+      toast.info('Task updated with success');
     } catch (e) {
       console.error(e.message);
     }
@@ -46,6 +48,7 @@ const TodoList = ({ setTodos, todos = [] }) => {
     try {
       await axios.delete(`/todos/${id}`);
       setTodos(newTodos);
+      toast.info('Task deleted with success');
     } catch (e) {
       console.error(e);
     }

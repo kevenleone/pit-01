@@ -11,21 +11,18 @@
       "id": 2
     }
   ],
+  "user": [
+    {
+      "id": 1,
+      "name": "Keven Leone",
+      "email": "keven.santos.sz@gmail.com"
+    }
+  ],
   "todos": [
     {
-      "isDone": false,
-      "name": "wwwwwwww",
-      "id": 3
-    },
-    {
-      "isDone": false,
-      "name": "qqqq",
-      "id": 4
-    },
-    {
-      "isDone": false,
-      "name": "wwww",
-      "id": 5
+      "isDone": true,
+      "name": "qqqqxxxx",
+      "id": 11
     }
   ],
   "comments": [
