@@ -9,6 +9,16 @@ import axios from '../../utils/api';
 export default function index() {
   const [todos, setTodos] = useState([]);
 
+  // const handleReset = async () => {
+  //  try {
+  //    await axios.delete('/todos/');
+  //    setTodos([]);
+  //    console.log(todos);
+  //  } catch (e) {
+  //    console.error(e);
+  //  }
+  // };
+
   const fetchData = async () => {
     const response = await axios.get('/todos');
     setTodos(response.data);
@@ -26,7 +36,8 @@ export default function index() {
       <button
         type="button"
         className="btn btn-info"
-        onClick={() => setTodos([])}
+        // onClick={handleReset}
+
       >
         Clear Todos
       </button>
