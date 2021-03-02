@@ -3,17 +3,33 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import User from './pages/User';
+import EditUser from './pages/User/edit-user';
 import Todo from './pages/Todo';
 
-const routes = [{
-  component: Home,
-  name: 'Home',
-  path: '/',
-}, {
-  component: Todo,
-  name: 'Todo',
-  path: '/todo',
-}];
+const routes = [
+  {
+    component: Home,
+    name: 'Home',
+    path: '/',
+  },
+  {
+    component: User,
+    name: 'User',
+    path: '/user',
+  },
+  {
+    component: EditUser,
+    name: 'User',
+    path: '/user/:id',
+    visible: false,
+  },
+  {
+    component: Todo,
+    name: 'Todo',
+    path: '/todo',
+  },
+];
 
 const Routes = () => (
   <BrowserRouter>

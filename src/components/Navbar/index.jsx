@@ -10,9 +10,13 @@ export default function Header({ title = 'React Pitang', routes = [] }) {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          {routes.map(({ name, path }) => (
-            <Nav.Link as={Link} key={path} to={path}>{name}</Nav.Link>
-          ))}
+          {routes
+            .filter(({ visible = true }) => visible)
+            .map(({ name, path }) => (
+              <Nav.Link as={Link} key={path} to={path}>
+                {name}
+              </Nav.Link>
+            ))}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
