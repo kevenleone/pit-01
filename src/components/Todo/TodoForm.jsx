@@ -16,7 +16,7 @@ export default function TodoForm({ todos, setTodos }) {
     }
 
     try {
-      const response = await axios.post('/todos', { isDone: false, name: todo });
+      const response = await axios.post('/todos', { completed: false, name: todo });
 
       setTodos([
         ...todos,

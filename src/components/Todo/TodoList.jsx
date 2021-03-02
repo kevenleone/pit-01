@@ -14,13 +14,13 @@ const TodoList = ({ setTodos, todos = [] }) => {
   const [text, setText] = useState('');
 
   const handleChecked = async (event, _editTodo) => {
-    const { checked: isDone } = event.target;
+    const { checked: completed } = event.target;
 
     const newTodos = todos.map((todo) => {
       if (todo.id === _editTodo.id) {
         return {
           ...todo,
-          isDone,
+          completed,
         };
       }
 
@@ -28,7 +28,7 @@ const TodoList = ({ setTodos, todos = [] }) => {
     });
 
     try {
-      await axios.put(`todos/${_editTodo.id}`, { ..._editTodo, isDone });
+      await axios.put(`todos/${_editTodo.id}`, { ..._editTodo, completed });
       setTodos(newTodos);
       toast.info('Task updated with success');
     } catch (e) {
@@ -91,13 +91,13 @@ const TodoList = ({ setTodos, todos = [] }) => {
             <tr key={index} className="todo">
               <td>
                 <input
-                  checked={todo.isDone}
+                  checked={todo.completed}
                   onChange={(event) => handleChecked(event, todo)}
                   type="checkbox"
                 />
               </td>
               <td>
-                <span className={todo.isDone ? 'done' : ''}>{todo.name}</span>
+                <span className={todo.completed ? 'done' : ''}>{todo.name}</span>
               </td>
               <td>
                 <Button

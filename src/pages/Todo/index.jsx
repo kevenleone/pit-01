@@ -17,7 +17,7 @@ export default function index() {
 
   const deleteAll = async () => {
     for (const todo of todos) {
-      if (todo.isDone) {
+      if (todo.completed) {
         await axios.delete(`/todos/${todo.id}`);
         toast.info(`Task ${todo.name} removed with success`);
       }
