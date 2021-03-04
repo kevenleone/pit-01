@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Table, Button, Form } from 'react-bootstrap';
 import { FaTrash, FaPencilAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import axios from '../../utils/api';
+import { TodoContext } from '../../pages/Todo/TodoContextProvider';
 
 import Modal from '../Modal';
 
 import './Todo.scss';
 
-const TodoList = ({ setTodos, todos = [] }) => {
+const TodoList = () => {
+  const [todos, setTodos] = useContext(TodoContext);
   const [editTodo, setEditTodo] = useState();
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState('');
