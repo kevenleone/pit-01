@@ -1,9 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const morgan = require('morgan');
 
-const UserController = require("./controllers/user.controller");
+require('dotenv').config();
 
-mongoose.connect("mongodb://localhost:27017/pit01", {
+const UserRouter = require('./routes/user.route');
+const authMiddleware = require('./middleware/auth.middleware');
+
+const {MONGO_URL, HTTP_PORT} = process.env;
+
+mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -11,19 +17,15 @@ mongoose.connect("mongodb://localhost:27017/pit01", {
 const app = express();
 
 app.use(express.json());
+app.use(authMiddleware);
+app.use(morgan("dev"));
+
+app.use('/api', UserRouter);
 
 app.get("/", (request, response) => {
-  response.status(404).send({ message: "Hello World", query: request.query });
+  response.send({ message: "Hello World" });
 });
 
-app.get("/user", (request, response) =>
-  UserController.index(request, response)
-);
-
-app.post("/user", (request, response) =>
-  UserController.store(request, response)
-);
-
-app.listen(3333, () => {
-  console.log("Rodando na porta 3333");
+app.listen(HTTP_PORT, () => {
+  console.log(`Rodando na porta ${HTTP_PORT}`);
 });
