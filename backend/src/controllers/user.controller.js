@@ -8,6 +8,7 @@ const saltRounds = 10;
 const hashPassword = async (password) => {
   const salt = await bcrypt.genSalt(saltRounds);
   const encryptPassword = await bcrypt.hash(password, salt);
+
   return encryptPassword;
 };
 

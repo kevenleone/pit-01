@@ -1,8 +1,9 @@
 const express = require("express");
+const cors = require('cors');
 const mongoose = require("mongoose");
 const morgan = require('morgan');
 
-require('dotenv').config();
+require('dotenv').config()
 
 const UserRouter = require('./routes/user.route');
 const authMiddleware = require('./middleware/auth.middleware');
@@ -16,6 +17,7 @@ mongoose.connect(MONGO_URL, {
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(authMiddleware);
 app.use(morgan("dev"));
