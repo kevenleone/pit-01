@@ -9,19 +9,18 @@ const colums = [
   },
   {
     name: 'name',
-    value: 'Task',
+    value: 'UserName',
   },
   {
-    name: 'isDone',
-    value: 'isDone',
-    render: (isDone) => <b>{isDone ? 'Completed' : 'Incompleted'}</b>,
+    name: 'email',
+    value: 'Email',
   },
 ];
 
 export default function index() {
   return (
     <Page title="Task List">
-      <ListView colums={colums} endpoint="/todos" />
+      <ListView colums={colums} endpoint="/user" />
     </Page>
   );
 }
