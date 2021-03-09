@@ -18,13 +18,7 @@
       "email": "cleyson@gmail.com"
     }
   ],
-  "todos": [
-    {
-      "isDone": false,
-      "name": "werrr",
-      "id": 1
-    }
-  ],
+  "todos": [],
   "comments": [
     {
       "id": 1,

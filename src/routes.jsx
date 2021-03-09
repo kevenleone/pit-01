@@ -17,7 +17,7 @@ const routes = [{
 
 const Routes = () => (
   <BrowserRouter>
-    <Navbar title="Pitang" routes={routes} />
+    <Navbar title="smarTo-Do" routes={routes} />
     <Switch>
       {routes.map(({ path, component }) => (
         <Route exact key={path} path={path} component={component} />
