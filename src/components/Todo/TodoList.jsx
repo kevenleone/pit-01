@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Table, Button, Form } from 'react-bootstrap';
 import { FaTrash, FaPencilAlt } from 'react-icons/fa';
-
+import { toast } from 'react-toastify';
+import axios from '../../utils/api';
 import Modal from '../Modal';
-
 import './Todo.scss';
 
 const TodoList = ({ setTodos, todos = [] }) => {
@@ -11,21 +11,26 @@ const TodoList = ({ setTodos, todos = [] }) => {
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState('');
 
-  const handleChecked = (event, { id }) => {
-    const { checked } = event.target;
+  const handleChecked = async (event, _editTodo) => {
+    const { checked: isDone } = event.target;
 
     const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
+      if (todo.id === _editTodo.id) {
         return {
           ...todo,
-          isDone: checked,
+          isDone,
         };
       }
 
       return todo;
     });
 
-    setTodos(newTodos);
+    try {
+      await axios.put(`todos/${_editTodo.id}`, { ..._editTodo, isDone });
+      setTodos(newTodos);
+    } catch (e) {
+      console.error(e.message);
+    }
   };
 
   const handleEdit = (todo) => {
@@ -34,26 +39,39 @@ const TodoList = ({ setTodos, todos = [] }) => {
     setShowModal(!showModal);
   };
 
-  const handleRemove = ({ id }) => {
+  const handleRemove = async ({ id }) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
 
-    setTodos(newTodos);
+    try {
+      await axios.delete(`/todos/${id}`);
+      setTodos(newTodos);
+
+      toast.info('Task Removed Successfully');
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
-  const onEditTodo = () => {
+  const onEditTodo = async () => {
+    const name = text;
     const newTodos = todos.map((todo) => {
       if (todo.id === editTodo.id) {
         return {
           ...todo,
-          name: text,
+          name,
         };
       }
 
       return todo;
     });
 
-    setTodos(newTodos);
-    handleEdit();
+    try {
+      await axios.put(`todos/${editTodo.id}`, { ...editTodo, name });
+      setTodos(newTodos);
+      handleEdit();
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   return (
@@ -71,6 +89,7 @@ const TodoList = ({ setTodos, todos = [] }) => {
             <tr key={index} className="todo">
               <td>
                 <input
+                  checked={todo.isDone}
                   onChange={(event) => handleChecked(event, todo)}
                   type="checkbox"
                 />
