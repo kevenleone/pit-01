@@ -5,7 +5,7 @@ const morgan = require('morgan');
 
 require('dotenv').config()
 
-const UserRouter = require('./routes/user.route');
+const Routes = require('./routes');
 const authMiddleware = require('./middleware/auth.middleware');
 
 const {MONGO_URL, HTTP_PORT} = process.env;
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(authMiddleware);
 app.use(morgan("dev"));
 
-app.use('/api', UserRouter);
+app.use(Routes);
 
 app.get("/", (request, response) => {
   response.send({ message: "Hello World" });
