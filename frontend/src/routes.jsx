@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import User from './pages/User';
 import EditUser from './pages/User/edit-user';
 import Todo from './pages/Todo';
+import Auth from './pages/Auth';
 
 const routes = [
   {
@@ -28,6 +29,12 @@ const routes = [
     component: Todo,
     name: 'Todo',
     path: '/todo',
+  },
+  {
+    component: Auth,
+    name: 'Auth',
+    path: '/auth',
+    visible: false,
   },
 ];
 
