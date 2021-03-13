@@ -9,8 +9,8 @@ export default function TodoContextProvider({ children }) {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('/todos');
-      setTodos(response.data);
+      const response = await axios.get('/todo');
+      setTodos(response.data.data);
     } catch (error) {
       toast.error(error.response.data.message);
     }

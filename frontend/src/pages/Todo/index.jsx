@@ -14,7 +14,7 @@ function Todo() {
   const deleteAll = async () => {
     // eslint-disable-next-line no-restricted-syntax
     for (const todo of todos) {
-      await axios.delete(`/todos/${todo.id}`);
+      await axios.delete(`/todo/${todo.id}`);
       toast.info(`Task ${todo.name} removed with success`);
     }
 

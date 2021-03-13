@@ -1,49 +1,62 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter, Switch, Route, Redirect,
+} from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import User from './pages/User';
-import EditUser from './pages/User/edit-user';
-import Todo from './pages/Todo';
-import Auth from './pages/Auth';
 
-const routes = [
-  {
-    component: Home,
-    name: 'Home',
-    path: '/',
-  },
-  {
-    component: User,
-    name: 'User',
-    path: '/user',
-  },
-  {
-    component: EditUser,
-    name: 'User',
-    path: '/user/:id',
-    visible: false,
-  },
-  {
-    component: Todo,
-    name: 'Todo',
-    path: '/todo',
-  },
-  {
-    component: Auth,
-    name: 'Auth',
-    path: '/auth',
-    visible: false,
-  },
-];
+import routes from './routelist';
+import { tokenKey } from './utils/constants';
+
+const publicRoutes = routes.filter((route) => !route.private);
+const privateRoutes = routes.filter((route) => route.private);
+
+const PublicRouter = ({ component: Component, ...otherProps }) => {
+  const isAuthenticated = localStorage.getItem(tokenKey);
+
+  return (
+    <Route
+      exact
+      {...otherProps}
+      render={(props) => {
+        if (isAuthenticated) {
+          return <Redirect to={{ pathname: '/home' }} />;
+        }
+
+        return <Component {...props} />;
+      }}
+    />
+  );
+};
+
+const PrivateRouter = ({ component: Component, ...otherProps }) => {
+  const isAuthenticated = localStorage.getItem(tokenKey);
+
+  return (
+    <Route
+      exact
+      {...otherProps}
+      render={(props) => {
+        if (isAuthenticated) {
+          return <Component {...props} />;
+        }
+
+        return <Redirect to={{ pathname: '/auth' }} />;
+      }}
+    />
+  );
+};
 
 const Routes = () => (
   <BrowserRouter>
     <Navbar title="Pitang" routes={routes} />
     <Switch>
-      {routes.map(({ path, component }) => (
-        <Route exact key={path} path={path} component={component} />
+      {publicRoutes.map((route) => (
+        <PublicRouter key={route.path} {...route} />
+      ))}
+
+      {privateRoutes.map((route) => (
+        <PrivateRouter key={route.path} {...route} />
       ))}
     </Switch>
   </BrowserRouter>

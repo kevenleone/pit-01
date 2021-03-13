@@ -6,7 +6,7 @@ class Todo {
 
     const todos = await TodoModel.find({ userId });
 
-    res.send({ todos });
+    res.send({ data: todos });
   }
 
   async store(req, res) {
@@ -16,7 +16,7 @@ class Todo {
 
     const todo = await TodoModel.create({ ...body, userId });
 
-    res.send({ todo });
+    res.send({ data: todo });
   }
 
   async getOne(req, res) {
@@ -56,7 +56,7 @@ class Todo {
 
     const todo = await TodoModel.findByIdAndUpdate(id, body, { new: true });
 
-    res.send({ todo });
+    res.send({ data: todo });
   }
 }
 
