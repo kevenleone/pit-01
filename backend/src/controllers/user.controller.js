@@ -16,7 +16,7 @@ class User {
   async index(req, res) {
     const users = await UserModel.find();
 
-    res.send({ users });
+    res.send({ data: users });
   }
 
   async store(req, res) {
@@ -28,7 +28,7 @@ class User {
 
     const user = await UserModel.create(body);
 
-    res.send({ user });
+    res.send({ data: user });
   }
 
   async getOne(req, res) {
@@ -72,7 +72,7 @@ class User {
 
     const user = await UserModel.findByIdAndUpdate(id, body, { new: true });
 
-    res.send({ user });
+    res.send({ data: user });
   }
 
   async auth(req, res) {

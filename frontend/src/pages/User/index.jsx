@@ -19,10 +19,6 @@ export default function User({ history }) {
 
   const columns = [
     {
-      name: 'id',
-      value: '#',
-    },
-    {
       name: 'name',
       value: 'Name',
     },
@@ -33,16 +29,16 @@ export default function User({ history }) {
     {
       name: '#',
       value: 'Actions',
-      render: (_, { id }) => (
+      render: (_, { _id }) => (
         <div>
-          <Button onClick={() => history.push(`/user/${id}`)}>
+          <Button onClick={() => history.push(`/user/${_id}`)}>
             <FaPencilAlt />
             {' Edit'}
           </Button>
           <Button
             className="ml-3"
             variant="danger"
-            onClick={() => onRemoveUser(id)}
+            onClick={() => onRemoveUser(_id)}
           >
             <FaTrash />
             {' Remove'}

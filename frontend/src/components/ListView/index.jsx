@@ -9,7 +9,7 @@ const ListView = ({ columns, endpoint, fetchCount }) => {
   const fetchData = async () => {
     try {
       const response = await api.get(endpoint);
-      setRows(response.data);
+      setRows(response.data.data);
     } catch (error) {
       toast.error(error.response.data.message);
     }

@@ -1,14 +1,14 @@
 const express = require("express");
-const cors = require('cors');
+const cors = require("cors");
 const mongoose = require("mongoose");
-const morgan = require('morgan');
+const morgan = require("morgan");
 
-require('dotenv').config()
+require("dotenv").config();
 
-const Routes = require('./routes');
-const authMiddleware = require('./middleware/auth.middleware');
+const Routes = require("./routes");
+const authMiddleware = require("./middleware/auth.middleware");
 
-const {MONGO_URL, HTTP_PORT} = process.env;
+const { MONGO_URL, HTTP_PORT } = process.env;
 
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
