@@ -1,11 +1,6 @@
 import React from "react";
-import {
-  Box,
-  Heading,
-  Container,
-  Button,
-  Loader,
-} from "react-bulma-components";
+import { Box, Heading, Container, Button } from "react-bulma-components";
+import Loading from "../components/Loading";
 
 type PageProps = {
   title: string;
@@ -32,18 +27,7 @@ const Page: React.FC<PageProps> = ({
         {onClickBack && <Button onClick={onClickBack}>Back</Button>}
       </Box>
 
-      {loading ? (
-        <Loader
-          style={{
-            width: 300,
-            height: 300,
-            borderTopColor: "transparent",
-            borderRightColor: "transparent",
-          }}
-        />
-      ) : (
-        children
-      )}
+      {loading ? <Loading /> : children}
     </Container>
   );
 };
