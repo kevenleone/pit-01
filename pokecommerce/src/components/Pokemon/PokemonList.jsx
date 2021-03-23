@@ -4,10 +4,6 @@ import ClayLayout from "@clayui/layout";
 import PokemonCard from "./PokemonCard";
 import AppContext from "../../AppContext";
 
-const getPokemonId = ({ url }) => {
-  return url.replace("https://pokeapi.co/api/v2/pokemon/", "").replace("/", "");
-};
-
 export default function PokemonList({ pokemons }) {
   const [{ wishlist }, dispatch] = useContext(AppContext);
 
@@ -18,17 +14,17 @@ export default function PokemonList({ pokemons }) {
   return (
     <ClayLayout.Row>
       {pokemons.map((pokemon, index) => {
-        const pokemonId = getPokemonId(pokemon);
 
         return (
           <ClayLayout.Col key={index} size={4}>
             <PokemonCard
-              onClickFavorite={() => onClickFavorite(pokemonId)}
+              types={pokemon.types}
+              onClickFavorite={() => onClickFavorite(pokemon.id)}
               favoriteSymbol={
-                wishlist.includes(pokemonId) ? "heart-full" : "heart"
+                wishlist.includes(pokemon.id) ? "heart-full" : "heart"
               }
               name={pokemon.name}
-              image_url={`https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`}
+              image_url={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`}
             />
           </ClayLayout.Col>
         );

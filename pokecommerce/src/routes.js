@@ -4,6 +4,7 @@ import NavigationBar from "./components/NavigationBar";
 
 import Home from './pages/Home'
 import Cart from './pages/Cart'
+import Pokemon from './pages/Pokemon'
 import Wishlist from './pages/Wishlist'
 
 const Routes = () => {
@@ -12,6 +13,7 @@ const Routes = () => {
       <NavigationBar />
       <Switch>
         <Route path='/' exact component={Home} />
+        <Route path='/pokemon/:name' exact component={Pokemon} />
         <Route path='/cart' exact component={Cart} />
         <Route path='/wishlist' exact component={Wishlist} />
       </Switch>

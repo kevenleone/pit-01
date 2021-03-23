@@ -1,0 +1,21 @@
+.pokemon-card {
+    &__name {
+        cursor: pointer;
+    }
+}
+
+.pokemon-types {
+    display: flex;
+
+    &__pokemon-type {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        margin-right: 15px;
+        font-weight: bold;
+        color: white;
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+    }
+}
