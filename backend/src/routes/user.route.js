@@ -10,5 +10,6 @@ Routes.put("/user/:id", UserController.update);
 Routes.get("/user", UserController.index);
 Routes.post("/user", UserController.store);
 Routes.post("/auth", UserController.auth);
+Routes.post('/me', UserController.me)
 
 module.exports = Routes;

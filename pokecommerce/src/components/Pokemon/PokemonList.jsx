@@ -4,17 +4,20 @@ import ClayLayout from "@clayui/layout";
 import PokemonCard from "./PokemonCard";
 import AppContext from "../../AppContext";
 
+import axios from "../../utils/api";
+
 export default function PokemonList({ pokemons }) {
   const [{ wishlist }, dispatch] = useContext(AppContext);
 
-  const onClickFavorite = (pokemonId) => {
-    dispatch({ type: "TOGGLE_WISHLIST", payload: pokemonId });
+  const onClickFavorite = async (pokemonId) => {
+    const response = await axios.post("/wishlist", { pokemonId });
+
+    dispatch({ type: "SET_WISHLIST", payload: response.data.wishlist });
   };
 
   return (
     <ClayLayout.Row>
       {pokemons.map((pokemon, index) => {
-
         return (
           <ClayLayout.Col key={index} size={4}>
             <PokemonCard

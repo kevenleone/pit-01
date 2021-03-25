@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 const UserModel = require("../models/user.model");
 
@@ -91,12 +91,20 @@ class User {
         throw new Error("Password invalid");
       }
 
-      const token = jwt.sign(user, process.env.JWT_SECRET)
+      const token = jwt.sign(user, process.env.JWT_SECRET);
 
       res.send({ token });
     } catch (error) {
       res.status(400).send({ message: error.message });
     }
+  }
+
+  async me(req, res) {
+    const { _id: userId } = req.headers.loggedUser;
+
+    const user = await UserModel.findById(userId);
+
+    res.send({ user });
   }
 }
 

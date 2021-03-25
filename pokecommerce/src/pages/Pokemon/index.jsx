@@ -68,6 +68,7 @@ const PokemonInfo = () => {
       <ClayTabs.Content activeIndex={activeTabKeyValue} fade>
         {tabs.map((tab, index) => (
           <ClayTabs.TabPane
+            key={index}
             className="p-2"
             aria-labelledby={`tab-${index + 1}`}
           >

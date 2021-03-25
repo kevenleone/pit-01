@@ -46,21 +46,35 @@ export default function SignIn({ history }) {
   return (
     <Page title={title}>
       <Form onSubmit={onSubmit}>
-
         {!isLogin && (
           <Form.Group>
             <Form.Label>Name</Form.Label>
-            <Form.Control name="name" type="text" value={form.name} onChange={onChange} />
+            <Form.Control
+              name="name"
+              type="text"
+              value={form.name}
+              onChange={onChange}
+            />
           </Form.Group>
         )}
 
         <Form.Group>
           <Form.Label>Email</Form.Label>
-          <Form.Control name="email" type="email" value={form.email} onChange={onChange} />
+          <Form.Control
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={onChange}
+          />
         </Form.Group>
         <Form.Group>
           <Form.Label>Password</Form.Label>
-          <Form.Control name="password" type="password" value={form.password} onChange={onChange} />
+          <Form.Control
+            name="password"
+            type="password"
+            value={form.password}
+            onChange={onChange}
+          />
         </Form.Group>
 
         <div className="mb-4">

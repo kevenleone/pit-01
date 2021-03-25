@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import { parseJwt, tokenKey } from "./utils/util";
 
 const AppContext = createContext();
 
@@ -6,11 +7,18 @@ const initialState = {
   pokemons: [],
   wishlist: [],
   cart: [],
-  loggedUser: null,
+  loggedUser: parseJwt(localStorage.getItem(tokenKey)),
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_LOGGED_USER": {
+      return {
+        ...state,
+        loggedUser: action.payload,
+      };
+    }
+
     case "SET_POKEMON": {
       return {
         ...state,
@@ -18,19 +26,10 @@ const reducer = (state, action) => {
       };
     }
 
-    case "TOGGLE_WISHLIST": {
-      let wishlist = state.wishlist;
-      const pokemonId = action.payload;
-
-      if (wishlist.includes(pokemonId)) {
-        wishlist = wishlist.filter((id) => id !== pokemonId);
-      } else {
-        wishlist = [...wishlist, pokemonId];
-      }
-
+    case "SET_WISHLIST": {
       return {
         ...state,
-        wishlist,
+        wishlist: action.payload,
       };
     }
 
