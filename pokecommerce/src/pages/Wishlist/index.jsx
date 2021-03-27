@@ -5,15 +5,11 @@ import PokemonList from "../../components/Pokemon/PokemonList";
 import AppContext from "../../AppContext";
 
 const WishList = () => {
-  const [{ pokemons, wishlist }] = useContext(AppContext);
-
-  const pokemonList = pokemons.filter((pokemon) =>
-    wishlist.includes(pokemon.id)
-  );
+  const [{ wishlist }] = useContext(AppContext);
 
   return (
     <Page title="Wishlist">
-      <PokemonList pokemons={pokemonList} />
+      <PokemonList pokemons={wishlist} />
     </Page>
   );
 };

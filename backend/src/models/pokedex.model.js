@@ -2,12 +2,7 @@ const mongoose = require('mongoose');
 
 const PokedexSchema = new mongoose.Schema({
     id: Number,
-    name: {
-        english: String,
-        japanese: String,
-        chinese: String,
-        french: String,
-    },
+    name: String,
     type: [String],
     base: {
         HP: Number,

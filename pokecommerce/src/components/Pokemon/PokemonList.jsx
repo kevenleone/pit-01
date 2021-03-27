@@ -9,10 +9,10 @@ import axios from "../../utils/api";
 export default function PokemonList({ pokemons }) {
   const [{ wishlist }, dispatch] = useContext(AppContext);
 
-  const onClickFavorite = async (pokemonId) => {
-    const response = await axios.post("/wishlist", { pokemonId });
+  const onClickFavorite = async (pokemon) => {
+    const response = await axios.post("/wishlist", { pokemonId: pokemon._id });
 
-    dispatch({ type: "SET_WISHLIST", payload: response.data.wishlist });
+    dispatch({ type: "SET_WISHLIST", payload: response.data.data });
   };
 
   return (
@@ -21,10 +21,12 @@ export default function PokemonList({ pokemons }) {
         return (
           <ClayLayout.Col key={index} size={4}>
             <PokemonCard
-              types={pokemon.types}
-              onClickFavorite={() => onClickFavorite(pokemon.id)}
+              types={pokemon.type}
+              onClickFavorite={() => onClickFavorite(pokemon)}
               favoriteSymbol={
-                wishlist.includes(pokemon.id) ? "heart-full" : "heart"
+                wishlist.find((wish) => wish._id === pokemon._id)
+                  ? "heart-full"
+                  : "heart"
               }
               name={pokemon.name}
               image_url={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`}

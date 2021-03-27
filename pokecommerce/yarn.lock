@@ -1229,6 +1229,13 @@
   dependencies:
     classnames "^2.2.6"
 
+"@clayui/loading-indicator@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@clayui/loading-indicator/-/loading-indicator-3.2.0.tgz#7a5565c5543b345d9e57d8b94b72b7ba83c4667f"
+  integrity sha512-c0R4NEa+5gITbsAgf3IxP6O4TjMzaWCT7rv3N4EFWT23lbChRFE/XCq5utXbQIM1M6b+1lYX2qoqsn9o4+63SA==
+  dependencies:
+    classnames "^2.2.6"
+
 "@clayui/navigation-bar@^3.3.5":
   version "3.3.5"
   resolved "https://registry.yarnpkg.com/@clayui/navigation-bar/-/navigation-bar-3.3.5.tgz#12c09b94fd5d5a76fd4fb9075d12971858584afa"
@@ -1241,6 +1248,18 @@
     classnames "^2.2.6"
     react-transition-group "^4.4.1"
     warning "^4.0.3"
+
+"@clayui/pagination@^3.25.1":
+  version "3.25.1"
+  resolved "https://registry.yarnpkg.com/@clayui/pagination/-/pagination-3.25.1.tgz#f71ec348d2574ca7568bd13cfc51fc7e69abd870"
+  integrity sha512-H06HNuvs8ablF8ga9Pxk5xEidUstVra8VRTG0fgZg1VLm3xh9dKrSZ2KXy7cc0vnyEm5k+7WmfJosk6qCXhnKA==
+  dependencies:
+    "@clayui/button" "^3.6.0"
+    "@clayui/drop-down" "^3.25.1"
+    "@clayui/icon" "^3.1.0"
+    "@clayui/link" "^3.2.0"
+    "@clayui/shared" "^3.5.1"
+    classnames "^2.2.6"
 
 "@clayui/panel@^3.25.0":
   version "3.25.0"

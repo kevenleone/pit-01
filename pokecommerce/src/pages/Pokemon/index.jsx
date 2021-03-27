@@ -5,6 +5,7 @@ import ClayTabs from "@clayui/tabs";
 import Page from "../../components/Page";
 import PokemonTypes from "../../components/Pokemon/PokemonTypes";
 import { fetchPokemon, gqlQueryPokemon } from "../../graphql";
+import axios from "../../utils/api";
 
 const PokemonInfo = () => {
   const [activeTabKeyValue, setActiveTabKeyValue] = useState(0);
@@ -87,18 +88,18 @@ export default function Pokemon({
 }) {
   const [pokemon, setPokemon] = useState();
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     try {
-      const response = await fetchPokemon(name, gqlQueryPokemon);
-      setPokemon(response.data.pokemon);
+      const response = await axios.get(`/pokedex/${name}`);
+      setPokemon(response.data.data);
     } catch (e) {
       console.error(e.message);
     }
-  }, [name]);
+  };
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   if (!pokemon?.id) {
     return null;

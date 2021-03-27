@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema(
     email: String,
     password: String,
     pokeDolar: Number,
-    wishlist: [Number],
+    wishlist: [mongoose.Types.ObjectId],
     cart: [
       {
         pokemonId: mongoose.Types.ObjectId,

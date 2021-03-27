@@ -14,8 +14,9 @@ const typesColors = {
 export default function PokemonTypes({ types = [] }) {
   return (
     <div className="pokemon-types">
-      {types.map(({ type: { name } }) => {
-        const backgroundColor = typesColors[name] || typesColors.other;
+      {types.map((name) => {
+        const backgroundColor =
+          typesColors[name.toLowerCase()] || typesColors.other;
 
         return (
           <div
