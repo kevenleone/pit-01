@@ -42,7 +42,7 @@ export default function PokemonCard({
           </ClayCard.Description>
         </ClayCard.Row>
         <ClayCard.Row>
-          <PokemonTypes types={types}></PokemonTypes>
+          <PokemonTypes types={types} />
         </ClayCard.Row>
       </ClayCard.Body>
     </ClayCard>

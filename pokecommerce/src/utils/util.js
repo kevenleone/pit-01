@@ -8,4 +8,8 @@ const parseJwt = (token) => {
   }
 };
 
-export { parseJwt, tokenKey };
+const getPokemonImageUrl = (id) => {
+  return `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
+};
+
+export { parseJwt, getPokemonImageUrl, tokenKey };

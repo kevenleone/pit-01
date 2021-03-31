@@ -5,6 +5,7 @@ import PokemonCard from "./PokemonCard";
 import AppContext from "../../AppContext";
 
 import axios from "../../utils/api";
+import { getPokemonImageUrl } from "../../utils/util";
 
 export default function PokemonList({ pokemons }) {
   const [{ wishlist }, dispatch] = useContext(AppContext);
@@ -29,7 +30,7 @@ export default function PokemonList({ pokemons }) {
                   : "heart"
               }
               name={pokemon.name}
-              image_url={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`}
+              image_url={getPokemonImageUrl(pokemon.id)}
             />
           </ClayLayout.Col>
         );

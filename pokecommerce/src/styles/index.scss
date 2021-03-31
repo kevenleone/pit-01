@@ -19,3 +19,18 @@
         align-items: center;
     }
 }
+
+.pokemon-info {
+    &__evolutions {
+        &__evolution-card {
+            img {
+                height: 120px;
+                width: 120px;
+                border-radius: 60px;
+            }
+
+            margin-top: 10px;
+            border-bottom: 1px solid lightgray;
+        }
+    }
+}

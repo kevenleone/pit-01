@@ -22,10 +22,11 @@ const AppContextProvider = ({ children }) => {
     const { data: pokemonList, ...pagination } = responsePokemon.data;
 
     dispatch({ type: "SET_POKEMON", payload: pokemonList });
-    // dispatch({
-    //   type: "SET_PAGINATION",
-    //   payload: { search, ...pagination },
-    // });
+  
+    dispatch({
+      type: "SET_PAGINATION",
+      payload: { search, ...pagination },
+    });
 
     setLoading(false);
   };
@@ -52,7 +53,7 @@ const AppContextProvider = ({ children }) => {
 
   return (
     <AppContext.Provider value={[state, dispatch]}>
-      {children}
+      {loading ? <ClayLoadingIndicator></ClayLoadingIndicator> : children}
     </AppContext.Provider>
   );
 };

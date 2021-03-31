@@ -1,85 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ClayLayout from "@clayui/layout";
-import ClayTabs from "@clayui/tabs";
 
 import Page from "../../components/Page";
 import PokemonTypes from "../../components/Pokemon/PokemonTypes";
-import { fetchPokemon, gqlQueryPokemon } from "../../graphql";
 import axios from "../../utils/api";
-
-const PokemonInfo = () => {
-  const [activeTabKeyValue, setActiveTabKeyValue] = useState(0);
-
-  const tabs = [
-    {
-      name: "Pokemon About",
-      render: () => (
-        <table className="table">
-          <tbody>
-            <tr>
-              <td>Species</td>
-              <td>Bulbassaur</td>
-            </tr>
-            <tr>
-              <td>Weight</td>
-              <td>Bulbassaur</td>
-            </tr>
-            <tr>
-              <td>Width</td>
-              <td>Bulbassaur</td>
-            </tr>
-            <tr>
-              <td>Weekness</td>
-              <td>A, B, C</td>
-            </tr>
-            <tr>
-              <td>Species</td>
-              <td>Bulbassaur</td>
-            </tr>
-          </tbody>
-        </table>
-      ),
-    },
-    {
-      name: "Pokemon Status",
-      render: () => <h1>Testando 2</h1>,
-    },
-    {
-      name: "Pokemon Evolutions",
-      render: () => <h1>Testando 3</h1>,
-    },
-  ];
-
-  return (
-    <>
-      <ClayTabs modern className="mt-4">
-        {tabs.map((tab, index) => (
-          <ClayTabs.Item
-            key={tab.name}
-            active={activeTabKeyValue === index}
-            innerProps={{
-              "aria-controls": `tabpanel-${index + 1}`,
-            }}
-            onClick={() => setActiveTabKeyValue(index)}
-          >
-            {tab.name}
-          </ClayTabs.Item>
-        ))}
-      </ClayTabs>
-      <ClayTabs.Content activeIndex={activeTabKeyValue} fade>
-        {tabs.map((tab, index) => (
-          <ClayTabs.TabPane
-            key={index}
-            className="p-2"
-            aria-labelledby={`tab-${index + 1}`}
-          >
-            {tab.render()}
-          </ClayTabs.TabPane>
-        ))}
-      </ClayTabs.Content>
-    </>
-  );
-};
+import PokemonInfo from "../../components/Pokemon/PokemonInfo";
 
 export default function Pokemon({
   match: {
@@ -90,8 +15,25 @@ export default function Pokemon({
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`/pokedex/${name}`);
-      setPokemon(response.data.data);
+      const [
+        { data: pokedexResponse },
+        { data: pokeSpeciesResponse },
+      ] = await Promise.all([
+        axios.get(`/pokedex/${name}`),
+        axios.get(
+          `https://pokeapi.co/api/v2/pokemon-species/${name.toLowerCase()}`
+        ),
+      ]);
+
+      const { data: pokeChainResponse } = await axios.get(
+        pokeSpeciesResponse.evolution_chain.url
+      );
+
+      setPokemon({
+        ...pokedexResponse.data,
+        ...pokeSpeciesResponse,
+        evolution_chain: pokeChainResponse,
+      });
     } catch (e) {
       console.error(e.message);
     }
@@ -100,6 +42,8 @@ export default function Pokemon({
   useEffect(() => {
     fetchData();
   }, []);
+
+  console.log(pokemon);
 
   if (!pokemon?.id) {
     return null;
@@ -110,9 +54,7 @@ export default function Pokemon({
       <ClayLayout.Row>
         <ClayLayout.Col size={12}>
           <center>
-            <div className="mt-4">
-              <PokemonTypes types={pokemon?.types}></PokemonTypes>
-            </div>
+            <PokemonTypes types={pokemon?.type}></PokemonTypes>
             <img
               alt={`Pokemon: ${name}`}
               width={300}
@@ -122,7 +64,7 @@ export default function Pokemon({
           </center>
         </ClayLayout.Col>
         <ClayLayout.Col>
-          <PokemonInfo />
+          <PokemonInfo pokemon={pokemon} />
         </ClayLayout.Col>
       </ClayLayout.Row>
     </Page>
