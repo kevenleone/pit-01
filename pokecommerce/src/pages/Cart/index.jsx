@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useContext } from "react";
 
-export default function index() {
-    return (
-        <div>
-            Cart
-        </div>
-    )
-}
+import Page from "../../components/Page";
+import PokemonList from "../../components/Pokemon/PokemonList";
+import AppContext from "../../AppContext";
+
+const PurchasedPokemon = () => {
+  const [
+    {
+      me: { purchasedPokemon },
+    },
+  ] = useContext(AppContext);
+
+  return (
+    <Page title="Purchased Pokemons">
+      <PokemonList pokemons={purchasedPokemon} />
+    </Page>
+  );
+};
+
+export default PurchasedPokemon;

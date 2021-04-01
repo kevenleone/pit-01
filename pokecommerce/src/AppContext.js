@@ -11,10 +11,13 @@ const initialState = {
   cart: [],
   pagination: {
     currentPage: searchParams.get("page") ?? 1,
-    search: '',
+    search: "",
     limit: 9,
     total: 0,
     totalPages: 0,
+  },
+  me: {
+    purchasedPokemon: [],
   },
   loggedUser: parseJwt(localStorage.getItem(tokenKey)),
 };
@@ -25,6 +28,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         loggedUser: action.payload,
+      };
+    }
+
+    case "SET_ME": {
+      return {
+        ...state,
+        me: action.payload,
       };
     }
 

@@ -55,7 +55,7 @@ export default function SignIn({ history }) {
 
   return (
     <Page>
-      <h1>{isLogin ? "Create Account" : "Login"}</h1>
+      <h1 className="app-title">{isLogin ? "Login" : "Create Account"}</h1>
 
       <ClayForm className="mt-4" onSubmit={onSubmit}>
         {!isLogin && (
@@ -98,7 +98,9 @@ export default function SignIn({ history }) {
           </ClayButton>
         </div>
 
-        <ClayButton type="submit">{title}</ClayButton>
+        <ClayButton disabled={!form.password || !form.email} type="submit">
+          {title}
+        </ClayButton>
       </ClayForm>
     </Page>
   );

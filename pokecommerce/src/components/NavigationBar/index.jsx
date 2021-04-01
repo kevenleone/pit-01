@@ -18,13 +18,13 @@ const routes = [
     path: "/wishlist",
   },
   {
-    name: "Cart",
+    name: "Purchased Pokemon",
     path: "/cart",
   },
 ];
 
 const NavigationBar = () => {
-  const [{ loggedUser }, dispatch] = useContext(AppContext);
+  const [{ loggedUser, me }, dispatch] = useContext(AppContext);
   const history = useHistory();
   const location = useLocation();
   const [active, setActive] = useState(false);
@@ -57,6 +57,11 @@ const NavigationBar = () => {
           </ClayNavigationBar.Item>
         ))}
       </>
+      <ClayNavigationBar.Item>
+        <ClayLink className="nav-link" displayType="unstyled">
+          Pokedolar ${me?.pokeDolar}
+        </ClayLink>
+      </ClayNavigationBar.Item>
       {loggedUser ? (
         <ClayNavigationBar.Item>
           <ClayDropDown

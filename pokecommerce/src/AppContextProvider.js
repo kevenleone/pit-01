@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
-import ClayLoadingIndicator from "@clayui/loading-indicator";
+import React, { useEffect, useReducer } from "react";
 
 import AppContext, { reducer, initialState } from "./AppContext";
 import axios from "./utils/api";
@@ -7,14 +6,12 @@ import { useDebounce } from "./hooks/useDebounce";
 
 const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [loading, setLoading] = useState(false);
   const { loggedUser, pagination: paginationState } = state;
   const { currentPage, limit, search } = paginationState;
 
   const debouncedValue = useDebounce(search, 200);
 
   const fetchPokemons = async () => {
-    setLoading(true);
     const responsePokemon = await axios.get(
       `/pokedex?page=${currentPage}&limit=${limit}&search=${debouncedValue}`
     );
@@ -22,13 +19,20 @@ const AppContextProvider = ({ children }) => {
     const { data: pokemonList, ...pagination } = responsePokemon.data;
 
     dispatch({ type: "SET_POKEMON", payload: pokemonList });
-  
+
     dispatch({
       type: "SET_PAGINATION",
       payload: { search, ...pagination },
     });
+  };
 
-    setLoading(false);
+  const fetchMe = async () => {
+    const response = await axios.post("/me");
+
+    dispatch({
+      type: "SET_ME",
+      payload: response.data.user,
+    });
   };
 
   const fetchWishlist = async () => {
@@ -36,6 +40,10 @@ const AppContextProvider = ({ children }) => {
 
     dispatch({ type: "SET_WISHLIST", payload: response.data.data });
   };
+
+  useEffect(() => {
+    fetchMe();
+  }, []);
 
   useEffect(() => {
     if (loggedUser) {
@@ -53,7 +61,7 @@ const AppContextProvider = ({ children }) => {
 
   return (
     <AppContext.Provider value={[state, dispatch]}>
-      {loading ? <ClayLoadingIndicator></ClayLoadingIndicator> : children}
+      {children}
     </AppContext.Provider>
   );
 };
