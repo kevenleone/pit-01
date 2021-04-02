@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationBar renders 1`] = `
+<DocumentFragment>
+  <nav
+    class="navbar navbar-collapse-absolute navbar-expand-md navbar-underline navigation-bar navigation-bar-light"
+  >
+    <div
+      class="container-fluid container-fluid-max-xl"
+    >
+      <button
+        aria-expanded="false"
+        class="navbar-toggler navbar-toggler-link collapsed btn btn-unstyled"
+        type="button"
+      >
+        <span
+          class="navbar-text-truncate"
+        >
+          My Pokemon Commerce
+        </span>
+        <svg
+          class="lexicon-icon lexicon-icon-caret-bottom"
+          role="presentation"
+        >
+          <use
+            xlink:href="#caret-bottom"
+          />
+        </svg>
+      </button>
+      <div
+        class="navbar-collapse collapse"
+      >
+        <div
+          class="container-fluid container-fluid-max-xl"
+        >
+          <ul
+            class="navbar-nav"
+          >
+            <li
+              class="nav-item dynamic-route"
+            >
+              <a
+                class="nav-link active link-unstyled"
+              >
+                Pokemons
+              </a>
+            </li>
+            <li
+              class="nav-item dynamic-route"
+            >
+              <a
+                class="nav-link link-unstyled"
+              >
+                Wishlist
+              </a>
+            </li>
+            <li
+              class="nav-item dynamic-route"
+            >
+              <a
+                class="nav-link link-unstyled"
+              >
+                Purchased Pokemon
+              </a>
+            </li>
+            <li
+              class="nav-item"
+            >
+              <a
+                class="nav-link link-unstyled"
+              >
+                Pokedolar $
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;

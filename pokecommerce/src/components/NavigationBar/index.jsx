@@ -40,11 +40,12 @@ const NavigationBar = () => {
   };
 
   return (
-    <ClayNavigationBar triggerLabel="Item 1">
+    <ClayNavigationBar triggerLabel="My Pokemon Commerce">
       <>
         {routes.map(({ name, path }) => (
           <ClayNavigationBar.Item
             key={path}
+            className="dynamic-route"
             active={path === location.pathname}
           >
             <ClayLink
@@ -57,11 +58,13 @@ const NavigationBar = () => {
           </ClayNavigationBar.Item>
         ))}
       </>
+      
       <ClayNavigationBar.Item>
         <ClayLink className="nav-link" displayType="unstyled">
-          Pokedolar ${me?.pokeDolar}
+          Pokedolar ${me.pokeDolar}
         </ClayLink>
       </ClayNavigationBar.Item>
+
       {loggedUser ? (
         <ClayNavigationBar.Item>
           <ClayDropDown

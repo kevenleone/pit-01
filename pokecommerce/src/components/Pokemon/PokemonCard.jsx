@@ -14,10 +14,10 @@ export default function PokemonCard({
   const history = useHistory();
 
   return (
-    <ClayCard className="pokemon-card">
+    <ClayCard title={name} className="pokemon-card">
       <ClayButtonWithIcon
         onClick={onClickFavorite}
-        className="ml-2 mt-2"
+        className="ml-2 mt-2 favorite-pokemon"
         symbol={favoriteSymbol}
         displayType="secondary"
       />
@@ -32,7 +32,7 @@ export default function PokemonCard({
       </center>
       <ClayCard.Body>
         <ClayCard.Row>
-          <ClayCard.Description displayType="title">
+          <ClayCard.Description title={`Description: ${name}`} displayType="title">
             <span
               className="pokemon-card__name"
               onClick={() => history.push(`/pokemon/${name}`)}

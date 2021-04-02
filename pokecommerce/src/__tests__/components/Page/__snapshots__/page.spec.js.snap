@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page Component renders 1`] = `
+<DocumentFragment>
+  <div
+    class="mt-4 container"
+  >
+    <h1 />
+    <div />
+  </div>
+</DocumentFragment>
+`;

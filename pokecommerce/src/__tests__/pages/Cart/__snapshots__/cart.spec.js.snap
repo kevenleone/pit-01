@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cart renders 1`] = `
+<DocumentFragment>
+  <div
+    class="mt-4 container"
+  >
+    <h1>
+      Purchased Pokemons
+    </h1>
+    <div>
+      <div
+        class="row"
+      >
+        <span
+          class="empty-state"
+        >
+          You don't have any purchased pokemon
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

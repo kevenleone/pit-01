@@ -18,23 +18,29 @@ export default function PokemonList({ pokemons }) {
 
   return (
     <ClayLayout.Row>
-      {pokemons.map((pokemon, index) => {
-        return (
-          <ClayLayout.Col key={index} size={4}>
-            <PokemonCard
-              types={pokemon.type}
-              onClickFavorite={() => onClickFavorite(pokemon)}
-              favoriteSymbol={
-                wishlist.find((wish) => wish._id === pokemon._id)
-                  ? "heart-full"
-                  : "heart"
-              }
-              name={pokemon.name}
-              image_url={getPokemonImageUrl(pokemon.id)}
-            />
-          </ClayLayout.Col>
-        );
-      })}
+      {pokemons.length ? (
+        pokemons.map((pokemon, index) => {
+          return (
+            <ClayLayout.Col key={index} size={4}>
+              <PokemonCard
+                types={pokemon.type}
+                onClickFavorite={() => onClickFavorite(pokemon)}
+                favoriteSymbol={
+                  wishlist.find((wish) => wish._id === pokemon._id)
+                    ? "heart-full"
+                    : "heart"
+                }
+                name={pokemon.name}
+                image_url={getPokemonImageUrl(pokemon.id)}
+              />
+            </ClayLayout.Col>
+          );
+        })
+      ) : (
+        <span className="empty-state">
+          You don't have any purchased pokemon
+        </span>
+      )}
     </ClayLayout.Row>
   );
 }
