@@ -16,7 +16,7 @@ export default function index({ rows = [], colums = [] }) {
           <tr key={row.id}>
             {colums.map((colum) => (
               <td key={colum.value}>
-                {colum.render ? colum.render(row[colum.name]) : row[colum.name]}
+                {colum.render ? colum.render(row[colum.name], row) : row[colum.name]}
               </td>
             ))}
           </tr>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Table from '../Table';
 import api from '../../utils/api';
 
-const ListView = ({ colums, endpoint }) => {
+const ListView = ({ colums, endpoint, fetchCount }) => {
   const [rows, setRows] = useState([]);
 
   const fetchData = async () => {
@@ -12,7 +12,7 @@ const ListView = ({ colums, endpoint }) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchCount]);
 
   return (
     <Table colums={colums} rows={rows} />

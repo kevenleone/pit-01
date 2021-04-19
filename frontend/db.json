@@ -1,0 +1,48 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2,
+      "title": "Minha primeira requisição",
+      "author": "Cleyson"
+    }
+  ],
+  "user": [
+    {
+      "email": "cleysonduarte99@gmail.coom",
+      "name": "Cleyson",
+      "id": 1
+    }
+  ],
+  "todos": [
+    {
+      "isDone": false,
+      "name": "asd",
+      "id": 1
+    },
+    {
+      "isDone": false,
+      "name": "sdf",
+      "id": 2
+    },
+    {
+      "isDone": false,
+      "name": "cxv",
+      "id": 3
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

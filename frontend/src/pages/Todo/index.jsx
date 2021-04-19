@@ -1,25 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import Page from '../../components/Page';
 import TodoForm from '../../components/Todo/TodoForm';
 import TodoList from '../../components/Todo/TodoList';
+import TodoContextProvider, { TodoContext } from './TodoContextProvider';
 
 import axios from '../../utils/api';
 
-export default function index() {
-  const [todos, setTodos] = useState([]);
-
-  const fetchData = async () => {
-    const response = await axios.get('/todos');
-    console.log(response);
-    setTodos(response.data);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+function Todo() {
+  const [todos,, fetchData] = useContext(TodoContext);
 
   const clearAll = async () => {
+    // eslint-disable-next-line no-restricted-syntax
     for (const todo of todos) {
       if (todo.isDone) {
         await axios.delete(`/todos/${todo.id}`);
@@ -31,8 +23,8 @@ export default function index() {
   return (
     <Page title="To-Do List">
 
-      <TodoForm todos={todos} setTodos={setTodos} />
-      <TodoList todos={todos} setTodos={setTodos} />
+      <TodoForm />
+      <TodoList />
 
       <button
         type="button"
@@ -47,3 +39,8 @@ export default function index() {
     </Page>
   );
 }
+export default () => (
+  <TodoContextProvider>
+    <Todo />
+  </TodoContextProvider>
+);
